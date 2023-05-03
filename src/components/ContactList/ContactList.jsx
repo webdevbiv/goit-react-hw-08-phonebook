@@ -18,6 +18,7 @@ function ContactList() {
   const contacts = useSelector(selectContacts);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
+  console.log(filteredContacts);
 
   return (
     <>
