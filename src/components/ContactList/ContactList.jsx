@@ -20,6 +20,7 @@ function ContactList() {
   const error = useSelector(selectError);
   console.log(filteredContacts);
   console.log(filteredContacts);
+  console.log(filteredContacts);
 
   return (
     <>
