@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { lazy, useEffect } from 'react';
-import { getContactsThunk } from 'redux/thunk';
+import { getContactsThunk } from 'redux/contacts/thunk';
 import { Route, Routes } from 'react-router-dom';
 
 import Layout from './Layout/Layout';
