@@ -1,9 +1,6 @@
 import { useDispatch } from 'react-redux';
-import { ContactForm } from './ContactForm/ContactForm';
-import { Filter } from './Filter/Filter';
 import { lazy, useEffect } from 'react';
 import { getContactsThunk } from 'redux/thunk';
-import ContactList from './ContactList/ContactList';
 import { Route, Routes } from 'react-router-dom';
 
 import Layout from './Layout/Layout';
