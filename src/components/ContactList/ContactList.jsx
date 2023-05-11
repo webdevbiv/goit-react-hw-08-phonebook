@@ -27,7 +27,7 @@ function ContactList() {
         <ListGroup>
           {filteredContacts.map(contact => (
             <ListGroup.Item key={contact.id} className={s.item}>
-              <div>
+              <div className={s.user}>
                 {contact.name}: {contact.phone}
               </div>
               <Button
