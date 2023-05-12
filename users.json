@@ -10,5 +10,17 @@
       "email": "qwertyu@gpoiuyt.com"
     },
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDVlMTFlMzg2OTliNzAwMTQ2NzMxYzgiLCJpYXQiOjE2ODM4ODY1NjN9.Jc85hyBZeu6CquA8c6XAnYlbQRIK8jyqJbGxRz9bWiQ"
+  },
+  "post1": {
+    "name": "IgorB",
+    "email": "qwertyu@gpoiuytt.com",
+    "password": "examplepwd12345"
+  },
+  "response1": {
+    "user": {
+      "name": "IgorB",
+      "email": "qwertyu@gpoiuytt.com"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDVlMzcxZjg2OTliNzAwMTQ2NzMyOWUiLCJpYXQiOjE2ODM4OTYwOTV9.QTsz3lne8OIR75si8d4s7bi3gZSXz7id2ZsshUwcym8"
   }
 }

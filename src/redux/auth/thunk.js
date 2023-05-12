@@ -21,8 +21,8 @@ export const userSignupThunk = createAsyncThunk(
       console.log(res.data);
       return res.data;
     } catch (error) {
-      console.log(error.message);
-      return rejectWithValue(error.message);
+      console.log(error);
+      return rejectWithValue(error.response.data);
     }
   }
 );

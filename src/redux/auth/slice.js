@@ -6,21 +6,23 @@ const initialState = {
   token: null,
   error: null,
   isLoggedIn: false,
-  isRefreshing: false,
+  isLoading: false,
 };
 
 const handlePending = (state, _) => {
-  state.isRefreshing = true;
+  state.isLoading = true;
 };
 
 const handleFulfilled = (state, { payload }) => {
   state.user = payload.user;
   state.token = payload.token;
   state.isLoggedIn = true;
+  state.error = null;
+  state.isLoading = false;
 };
 
 const handleRejected = (state, { payload }) => {
-  state.isRefreshing = false;
+  state.isLoading = false;
   state.error = payload;
 };
 
