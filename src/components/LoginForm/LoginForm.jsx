@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectErrorAuth } from 'redux/auth/selectors';
+import { userLoginThunk } from 'redux/auth/operations';
 
 const LoginForm = () => {
   const distpatch = useDispatch();
+  const error = useSelector(selectErrorAuth);
+
+  useEffect(() => {
+    if (error) {
+      console.log('Wrong E-mail or Password');
+    }
+  }, [error]);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -11,10 +20,10 @@ const LoginForm = () => {
     const loginUser = {
       // email: form.elements.email.value,
       // password: form.elements.password.value,
-      email: 'qwertyu@gpoiuytttt.com',
+      email: 'qwertyu@gpoiuyt.com',
       password: 'examplepwd12345',
     };
-    distpatch(loginUser);
+    distpatch(userLoginThunk(loginUser));
     //form.reset();
   };
   return (
@@ -43,7 +52,7 @@ const LoginForm = () => {
           />
         </Form.Group>
         <Button variant="primary" type="submit">
-          Register
+          Login
         </Button>
       </Form>
     </div>

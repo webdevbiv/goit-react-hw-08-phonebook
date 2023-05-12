@@ -2,12 +2,11 @@ import React, { useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectErrorAuth } from 'redux/auth/selectors';
-import { userSignupThunk } from 'redux/auth/thunk';
+import { userSignupThunk } from 'redux/auth/operations';
 
 const RegistrationForm = () => {
   const distpatch = useDispatch();
   const error = useSelector(selectErrorAuth);
-  console.log(error);
 
   useEffect(() => {
     if (error && error.keyPattern.email) {
@@ -32,7 +31,7 @@ const RegistrationForm = () => {
 
   return (
     <div className={'container'}>
-      <Form id="registerUser" onSubmit={handleSubmit}>
+      <Form id="userSignup" onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label> Name </Form.Label>
           <Form.Control

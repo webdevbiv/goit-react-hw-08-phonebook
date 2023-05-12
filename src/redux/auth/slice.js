@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { userSignupThunk } from './thunk';
+import {
+  userLoginThunk,
+  userProfileThunk,
+  userSignupThunk,
+} from './operations';
 
 const initialState = {
   user: { name: null, email: null },
@@ -21,6 +25,19 @@ const handleFulfilled = (state, { payload }) => {
   state.isLoading = false;
 };
 
+const handleFulfilledLogin = (state, { payload }) => {
+  console.log(payload);
+  state.user = payload.user;
+  state.token = payload.token;
+  state.isLoading = false;
+  state.error = null;
+  state.isLoggedIn = true;
+};
+
+const handleFulfilledUserProfile = (state, { payload }) => {
+  console.log(payload);
+};
+
 const handleRejected = (state, { payload }) => {
   state.isLoading = false;
   state.error = payload;
@@ -33,7 +50,13 @@ const authSlice = createSlice({
     builder
       .addCase(userSignupThunk.pending, handlePending)
       .addCase(userSignupThunk.fulfilled, handleFulfilled)
-      .addCase(userSignupThunk.rejected, handleRejected);
+      .addCase(userSignupThunk.rejected, handleRejected)
+      .addCase(userLoginThunk.pending, handlePending)
+      .addCase(userLoginThunk.fulfilled, handleFulfilledLogin)
+      .addCase(userLoginThunk.rejected, handleRejected)
+      .addCase(userProfileThunk.pending, handlePending)
+      .addCase(userProfileThunk.fulfilled, handleFulfilledUserProfile)
+      .addCase(userProfileThunk.rejected, handleRejected);
     //  .addMatcher(isAnyOf(...allThunks('rejected')), handleRejected);
   },
   // const arrThunks = [registerUser, addContactThunk, deleteContactThunk];
