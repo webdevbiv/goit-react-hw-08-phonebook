@@ -5,7 +5,7 @@ import {
   selectContacts,
   selectError,
   selectIsLoading,
-} from 'redux/selectors';
+} from 'redux/contacts/selectors';
 
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';

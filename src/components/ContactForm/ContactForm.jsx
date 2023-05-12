@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
 import { ToastContainer, toast } from 'react-toastify';
 import { addContactThunk } from 'redux/contacts/thunk';
-import { selectContacts } from 'redux/selectors';
+import { selectContacts } from 'redux/contacts/selectors';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';

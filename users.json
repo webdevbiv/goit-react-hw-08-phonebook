@@ -1,0 +1,14 @@
+{
+  "post": {
+    "name": "IgorB",
+    "email": "qwertyu@gpoiuyt.com",
+    "password": "examplepwd12345"
+  },
+  "response": {
+    "user": {
+      "name": "IgorB",
+      "email": "qwertyu@gpoiuyt.com"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDVlMTFlMzg2OTliNzAwMTQ2NzMxYzgiLCJpYXQiOjE2ODM4ODY1NjN9.Jc85hyBZeu6CquA8c6XAnYlbQRIK8jyqJbGxRz9bWiQ"
+  }
+}
