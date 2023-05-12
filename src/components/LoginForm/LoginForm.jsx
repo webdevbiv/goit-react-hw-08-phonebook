@@ -1,49 +1,25 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectErrorAuth } from 'redux/auth/selectors';
-import { userSignupThunk } from 'redux/auth/thunk';
+import { useDispatch } from 'react-redux';
 
-const RegistrationForm = () => {
+const LoginForm = () => {
   const distpatch = useDispatch();
-  const error = useSelector(selectErrorAuth);
-  console.log(error);
-
-  useEffect(() => {
-    if (error && error.keyPattern.email) {
-      console.log('Email already exists');
-    }
-  }, [error]);
 
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.target;
-    const newUser = {
-      // name: form.elements.name.value,
+    const loginUser = {
       // email: form.elements.email.value,
       // password: form.elements.password.value,
-      name: 'lfb',
       email: 'qwertyu@gpoiuytttt.com',
       password: 'examplepwd12345',
     };
-    distpatch(userSignupThunk(newUser));
+    distpatch(loginUser);
     //form.reset();
   };
-
   return (
     <div className={'container'}>
-      <Form id="registerUser" onSubmit={handleSubmit}>
-        <Form.Group className="mb-3">
-          <Form.Label> Name </Form.Label>
-          <Form.Control
-            type="text"
-            name="name"
-            placeholder="Jacob Mercer"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            // required
-          />
-        </Form.Group>
+      <Form id="loginUser" onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label> E-mail </Form.Label>
           <Form.Control
@@ -74,4 +50,4 @@ const RegistrationForm = () => {
   );
 };
 
-export default RegistrationForm;
+export default LoginForm;
