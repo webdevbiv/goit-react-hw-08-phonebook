@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { userLogoutThunk } from 'redux/auth/operations';
+import { logOut } from 'redux/auth/operations';
 
 const UserMenu = () => {
   const distpatch = useDispatch();
@@ -8,7 +8,7 @@ const UserMenu = () => {
   return (
     <div>
       <p>email</p>
-      <button onClick={() => distpatch(userLogoutThunk())}>Logout</button>
+      <button onClick={() => distpatch(logOut())}>Logout</button>
     </div>
   );
 };

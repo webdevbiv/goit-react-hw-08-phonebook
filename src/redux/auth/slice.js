@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
+  logOut,
   userLoginThunk,
   userProfileThunk,
   userSignupThunk,
@@ -26,7 +27,6 @@ const handleFulfilled = (state, { payload }) => {
 };
 
 const handleFulfilledLogin = (state, { payload }) => {
-  console.log(payload);
   state.user = payload.user;
   state.token = payload.token;
   state.isLoading = false;
@@ -34,7 +34,7 @@ const handleFulfilledLogin = (state, { payload }) => {
   state.isLoggedIn = true;
 };
 
-const handleFulfilledUserProfile = (state, { payload }) => {
+const handleFulfilledUserProfile = (_, { payload }) => {
   console.log(payload);
 };
 
@@ -54,9 +54,12 @@ const authSlice = createSlice({
       .addCase(userLoginThunk.pending, handlePending)
       .addCase(userLoginThunk.fulfilled, handleFulfilledLogin)
       .addCase(userLoginThunk.rejected, handleRejected)
-      .addCase(userProfileThunk.pending, handlePending)
-      .addCase(userProfileThunk.fulfilled, handleFulfilledUserProfile)
-      .addCase(userProfileThunk.rejected, handleRejected);
+      // .addCase(userProfileThunk.pending, handlePending)
+      // .addCase(userProfileThunk.fulfilled, handleFulfilledUserProfile)
+      // .addCase(userProfileThunk.rejected, handleRejected)
+      .addCase(logOut.pending, handlePending)
+      .addCase(logOut.fulfilled, handleFulfilledUserProfile)
+      .addCase(logOut.rejected, handleRejected);
     //  .addMatcher(isAnyOf(...allThunks('rejected')), handleRejected);
   },
   // const arrThunks = [registerUser, addContactThunk, deleteContactThunk];

@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
+
 const publicInstance = axios.create({
   baseURL: 'https://connections-api.herokuapp.com',
 });
@@ -52,7 +54,7 @@ export const userLogoutThunk = createAsyncThunk(
   'auth/logout',
   async (_, { rejectWithValue }) => {
     try {
-      await publicInstance.post('/users/logout');
+      await axios.post('/users/logout');
       clearAuthHeader();
     } catch (error) {
       console.error(error);
@@ -61,7 +63,16 @@ export const userLogoutThunk = createAsyncThunk(
   }
 );
 
-export const userProfileThunk = createAsyncThunk(
+export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+  try {
+    await axios.post('/users/logout');
+    clearAuthHeader();
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+export const userRefreshThunk = createAsyncThunk(
   'auth/current',
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
