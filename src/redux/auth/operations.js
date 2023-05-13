@@ -25,7 +25,7 @@ export const userSignupThunk = createAsyncThunk(
   'auth/signup',
   async (credentials, { rejectWithValue }) => {
     try {
-      const { data } = await publicInstance.post('users/signup', credentials);
+      const { data } = await publicInstance.post('/users/signup', credentials);
       setAuthHeader(data.token);
       console.log(data);
       return data;

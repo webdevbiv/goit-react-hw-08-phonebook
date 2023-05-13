@@ -1,9 +1,13 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import RegistrationForm from 'components/RegistrationForm/RegistrationForm';
+import Container from 'components/Container/Container';
 
 const RegistrationPage = () => {
-  return <RegistrationForm />;
+  return (
+    <Container>
+      <RegistrationForm />
+    </Container>
+  );
 };
 
 export default RegistrationPage;

@@ -1,5 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { userLogoutThunk, userLoginThunk, userSignupThunk } from './operations';
+import {
+  userLogoutThunk,
+  userLoginThunk,
+  userSignupThunk,
+  userRefreshThunk,
+} from './operations';
 
 const initialState = {
   user: { name: null, email: null },
@@ -10,13 +15,10 @@ const initialState = {
   isRefreshing: false,
 };
 
-const handlePending = (state, _) => {
-  state.isLoading = true;
-};
-
 const handleFulfilledUserSignup = (state, { payload }) => {
   state.error = null;
   state.isLoading = false;
+  state.isRefreshing = false;
   state.isLoggedIn = true;
   state.token = payload.token;
   state.user = payload.user;
@@ -26,11 +28,13 @@ const handleFulfilledUserLogin = (state, { payload }) => {
   state.error = null;
   state.isLoading = false;
   state.isLoggedIn = true;
+  state.isRefreshing = false;
   state.token = payload.token;
   state.user = payload.user;
 };
 
-const handleFulfilledUserLogout = (state, { payload }) => {
+const handleFulfilledUserLogout = (state, _) => {
+  state.isRefreshing = false;
   state.error = null;
   state.isLoading = false;
   state.isLoggedIn = false;
@@ -38,9 +42,24 @@ const handleFulfilledUserLogout = (state, { payload }) => {
   state.user = { name: null, email: null };
 };
 
+const handleFulfilledUserRefreshThunk = (state, { payload }) => {
+  console.log('refreshing success');
+  state.error = null;
+  state.isLoading = false;
+  state.isLoggedIn = true;
+  state.isRefreshing = false;
+  state.user = payload;
+};
+
+const handlePending = (state, _) => {
+  state.isLoading = true;
+  state.isRefreshing = true;
+};
+
 const handleRejected = (state, { payload }) => {
   state.error = payload;
   state.isLoading = false;
+  state.isRefreshing = false;
 };
 
 //SECTION - addCase section
@@ -57,10 +76,10 @@ const authSlice = createSlice({
       .addCase(userLogoutThunk.rejected, handleRejected)
       .addCase(userSignupThunk.fulfilled, handleFulfilledUserSignup)
       .addCase(userSignupThunk.pending, handlePending)
-      .addCase(userSignupThunk.rejected, handleRejected);
-    // .addCase(userRefreshThunk.fulfilled, handleFulfilledUserRefreshThunk)
-    // .addCase(userRefreshThunk.pending, handlePending)
-    // .addCase(userRefreshThunk.rejected, handleRejected)
+      .addCase(userSignupThunk.rejected, handleRejected)
+      .addCase(userRefreshThunk.fulfilled, handleFulfilledUserRefreshThunk)
+      .addCase(userRefreshThunk.pending, handlePending)
+      .addCase(userRefreshThunk.rejected, handleRejected);
     //TODO - create addMatcher
     //  .addMatcher(isAnyOf(...allThunks('rejected')), handleRejected);
   },
