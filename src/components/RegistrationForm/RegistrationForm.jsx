@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectErrorAuth } from 'redux/auth/selectors';
 import { userSignupThunk } from 'redux/auth/operations';
+import { selectErrorAuth } from 'redux/auth/selectors';
 
 const RegistrationForm = () => {
   const distpatch = useDispatch();
