@@ -1,20 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
-
 const publicInstance = axios.create({
-  baseURL: 'https://connections-api.herokuapp.com',
+  baseURL: 'https://connections-api.herokuapp.com/',
 });
 
-const privateInstance = axios.create({
-  baseURL: 'https://connections-api.herokuapp.com',
-});
+const privateInstance = token =>
+  axios.create({
+    baseURL: 'https://connections-api.herokuapp.com/',
+    headers: { Authorization: `Bearer ${token}` },
+  });
 
 // Utility to add JWT
 const setAuthHeader = token => {
-  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  console.log('token added to headers');
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
 // Utility to remove JWT
@@ -26,7 +25,7 @@ export const userSignupThunk = createAsyncThunk(
   'auth/signup',
   async (credentials, { rejectWithValue }) => {
     try {
-      const { data } = await publicInstance.post('/users/signup', credentials);
+      const { data } = await publicInstance.post('users/signup', credentials);
       setAuthHeader(data.token);
       console.log(data);
       return data;
@@ -44,6 +43,7 @@ export const userLoginThunk = createAsyncThunk(
       const { data } = await publicInstance.post('/users/login', credentials);
       setAuthHeader(data.token);
       console.log(`userLoginThunk success token: ${data.token}`);
+      console.log('token added to headers');
       return data;
     } catch (error) {
       console.log(error);
@@ -54,15 +54,16 @@ export const userLoginThunk = createAsyncThunk(
 //ANCHOR - logout
 export const userLogoutThunk = createAsyncThunk(
   'auth/logout',
-  async (_, { rejectWithValue }) => {
+  async (_, thunkAPI) => {
     try {
-      console.log(axios.defaults.headers.common['Authorization']);
-      await axios.post('/users/logout');
-
+      const state = thunkAPI.getState();
+      const token = state.auth.token;
+      await privateInstance(token).post('/users/logout');
+      console.log('userLogoutThunk success');
       clearAuthHeader();
     } catch (error) {
       console.error(error);
-      return rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -78,8 +79,9 @@ export const userRefreshThunk = createAsyncThunk(
     }
     try {
       setAuthHeader(token);
-      const { data } = await privateInstance.get('/users/current');
+      const { data } = await privateInstance(token).get('/users/current');
       console.log(`userRefreshThunk success`);
+      console.log(data);
       return data;
     } catch (error) {
       console.log(error);
