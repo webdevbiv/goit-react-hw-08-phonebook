@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectErrorAuth } from 'redux/auth/selectors';
 import { userLoginThunk } from 'redux/auth/operations';
+import { selectErrorAuth } from 'redux/auth/selectors';
 
 const LoginForm = () => {
   const distpatch = useDispatch();
@@ -18,6 +18,7 @@ const LoginForm = () => {
     e.preventDefault();
     const form = e.target;
     const loginUser = {
+      //FIXME - outcoment page
       // email: form.elements.email.value,
       // password: form.elements.password.value,
       email: 'qwertyu@gpoiuyt.com',
@@ -26,6 +27,7 @@ const LoginForm = () => {
     distpatch(userLoginThunk(loginUser));
     //form.reset();
   };
+
   return (
     <div className={'container'}>
       <Form id="loginUser" onSubmit={handleSubmit}>

@@ -18,6 +18,7 @@ const RegistrationForm = () => {
     e.preventDefault();
     const form = e.target;
     const newUser = {
+      //FIXME - outcomment page
       // name: form.elements.name.value,
       // email: form.elements.email.value,
       // password: form.elements.password.value,

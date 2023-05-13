@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { logOut, userLoginThunk, userSignupThunk } from './operations';
+import { userLogoutThunk, userLoginThunk, userSignupThunk } from './operations';
 
 const initialState = {
   user: { name: null, email: null },
@@ -39,23 +39,25 @@ const handleRejected = (state, { payload }) => {
   state.isLoading = false;
 };
 
+//SECTION - addCase section
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   extraReducers: builder => {
     builder
-      .addCase(logOut.fulfilled, handleFulfilledUserProfile)
-      .addCase(logOut.pending, handlePending)
-      .addCase(logOut.rejected, handleRejected)
       .addCase(userLoginThunk.fulfilled, handleFulfilledLogin)
       .addCase(userLoginThunk.pending, handlePending)
       .addCase(userLoginThunk.rejected, handleRejected)
+      .addCase(userLogoutThunk.fulfilled, handleFulfilledUserProfile)
+      .addCase(userLogoutThunk.pending, handlePending)
+      .addCase(userLogoutThunk.rejected, handleRejected)
       .addCase(userSignupThunk.fulfilled, handleFulfilled)
       .addCase(userSignupThunk.pending, handlePending)
       .addCase(userSignupThunk.rejected, handleRejected);
     // .addCase(userProfileThunk.fulfilled, handleFulfilledUserProfile)
     // .addCase(userProfileThunk.pending, handlePending)
     // .addCase(userProfileThunk.rejected, handleRejected)
+    //TODO - create addMatcher
     //  .addMatcher(isAnyOf(...allThunks('rejected')), handleRejected);
   },
   // const arrThunks = [registerUser, addContactThunk, deleteContactThunk];
