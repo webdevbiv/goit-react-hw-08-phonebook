@@ -16,7 +16,7 @@ const LoginForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const form = e.target;
+    // const form = e.target;
     const loginUser = {
       //FIXME - outcoment page
       // email: form.elements.email.value,
@@ -38,6 +38,7 @@ const LoginForm = () => {
           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           placeholder="Email name@example.com"
+          className="form-input"
           // required
         />
       </Form.Group>
@@ -49,6 +50,7 @@ const LoginForm = () => {
           placeholder="Password"
           pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$"
           title="Minimum five characters, at least one letter and one number"
+          className="form-input"
           // required
         />
       </Form.Group>

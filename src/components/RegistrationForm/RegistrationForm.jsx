@@ -1,9 +1,9 @@
 import { useAuth } from 'components/hooks';
 import { useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { userSignupThunk } from 'redux/auth/operations';
-import { selectErrorAuth } from 'redux/auth/selectors';
+// import { selectErrorAuth } from 'redux/auth/selectors';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const RegistrationForm = () => {
@@ -18,7 +18,7 @@ const RegistrationForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const form = e.target;
+    // const form = e.target;
     const newUser = {
       //FIXME - outcomment page
       // name: form.elements.name.value,
@@ -42,6 +42,7 @@ const RegistrationForm = () => {
           placeholder="Jacob Mercer"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+          className="form-input"
           // required
         />
       </Form.Group>
@@ -53,6 +54,7 @@ const RegistrationForm = () => {
           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           placeholder="name@example.com"
+          className="form-input"
           // required
         />
       </Form.Group>
@@ -64,6 +66,7 @@ const RegistrationForm = () => {
           placeholder="Password"
           pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$"
           title="Minimum five characters, at least one letter and one number"
+          className="form-input"
           // required
         />
       </Form.Group>

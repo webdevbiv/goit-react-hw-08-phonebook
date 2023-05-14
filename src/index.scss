@@ -59,3 +59,16 @@ main {
 .form-label {
   color: white;
 }
+
+.form-input {
+  border: none;
+  &:hover,
+  &:focus {
+    outline: 1px solid rgb(38, 171, 248);
+    box-shadow: 0px 0px 8px 4px rgba(15, 191, 250, 0.7);
+  }
+}
+
+.btn-primary {
+  box-sizing: border-box;
+}

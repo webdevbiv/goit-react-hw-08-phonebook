@@ -5,7 +5,6 @@ import { Route, Routes } from 'react-router-dom';
 import { userRefreshThunk } from 'redux/auth/operations';
 import Layout from '../Layout/Layout';
 import HomePage from 'components/pages/HomePage';
-import s from './App.module.scss';
 
 const RegistrationPage = lazy(() => import('../pages/RegistrationPage'));
 const LoginPage = lazy(() => import('../pages/LoginPage'));
