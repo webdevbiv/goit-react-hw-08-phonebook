@@ -21,7 +21,7 @@ function ContactList() {
 
   return (
     <>
-      {isLoading && <div>Loading...</div>}
+      {isLoading && <>Loading</>}
       {error && <div>Error: {error.message}</div>}
       {contacts && (
         <>

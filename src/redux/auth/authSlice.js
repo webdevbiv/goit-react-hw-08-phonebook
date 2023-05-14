@@ -13,12 +13,12 @@ const initialState = {
   isLoggedIn: false,
   isLoading: false,
   isRefreshing: false,
+  imageIsLoading: true,
 };
 
 const handleFulfilledUserSignup = (state, { payload }) => {
   state.error = null;
   state.isLoading = false;
-  state.isRefreshing = false;
   state.isLoggedIn = true;
   state.token = payload.token;
   state.user = payload.user;
@@ -28,13 +28,11 @@ const handleFulfilledUserLogin = (state, { payload }) => {
   state.error = null;
   state.isLoading = false;
   state.isLoggedIn = true;
-  state.isRefreshing = false;
   state.token = payload.token;
   state.user = payload.user;
 };
 
 const handleFulfilledUserLogout = (state, _) => {
-  state.isRefreshing = false;
   state.error = null;
   state.isLoading = false;
   state.isLoggedIn = false;
@@ -88,3 +86,5 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
+
+export const { setImageIsLoading } = authSlice.actions;

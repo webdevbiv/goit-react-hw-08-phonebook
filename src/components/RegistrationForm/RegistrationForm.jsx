@@ -33,49 +33,51 @@ const RegistrationForm = () => {
   };
 
   return (
-    <Form id="userSignup" onSubmit={handleSubmit}>
-      <Form.Group className="mb-3">
-        <Form.Label> Name </Form.Label>
-        <Form.Control
-          type="text"
-          name="name"
-          placeholder="Jacob Mercer"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          className="form-input"
-          // required
-        />
-      </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label> E-mail </Form.Label>
-        <Form.Control
-          type="email"
-          name="email"
-          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          placeholder="name@example.com"
-          className="form-input"
-          // required
-        />
-      </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label> Password </Form.Label>
-        <Form.Control
-          type="password"
-          name="password"
-          placeholder="Password"
-          pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$"
-          title="Minimum five characters, at least one letter and one number"
-          className="form-input"
-          // required
-        />
-      </Form.Group>
-      <div className="btn-wrapper">
-        <Button className="btn-fit-space" variant="primary" type="submit">
-          Register
-        </Button>
-      </div>
-    </Form>
+    <>
+      <Form id="userSignup" onSubmit={handleSubmit}>
+        <Form.Group className="mb-3">
+          <Form.Label> Name </Form.Label>
+          <Form.Control
+            type="text"
+            name="name"
+            placeholder="Jacob Mercer"
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+            className="form-input"
+            // required
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label> E-mail </Form.Label>
+          <Form.Control
+            type="email"
+            name="email"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            placeholder="name@example.com"
+            className="form-input"
+            // required
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label> Password </Form.Label>
+          <Form.Control
+            type="password"
+            name="password"
+            placeholder="Password"
+            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$"
+            title="Minimum five characters, at least one letter and one number"
+            className="form-input"
+            // required
+          />
+        </Form.Group>
+        <div className="btn-wrapper">
+          <Button className="btn-fit-space" variant="primary" type="submit">
+            Sign up
+          </Button>
+        </div>
+      </Form>
+    </>
   );
 };
 
