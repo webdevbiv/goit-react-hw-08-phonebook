@@ -78,9 +78,12 @@ export const ContactForm = () => {
             required
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
+
+        <div className="btn-wrapper">
+          <Button variant="primary" type="submit" className="btn-fit-space">
+            Submit
+          </Button>
+        </div>
       </Form>
     </>
   );

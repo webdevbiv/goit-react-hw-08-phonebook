@@ -70,9 +70,11 @@ const RegistrationForm = () => {
           // required
         />
       </Form.Group>
-      <Button variant="primary" type="submit">
-        Register
-      </Button>
+      <div className="btn-wrapper">
+        <Button className="btn-fit-space" variant="primary" type="submit">
+          Register
+        </Button>
+      </div>
     </Form>
   );
 };

@@ -24,22 +24,25 @@ function ContactList() {
       {isLoading && <div>Loading...</div>}
       {error && <div>Error: {error.message}</div>}
       {contacts && (
-        <ListGroup>
-          {filteredContacts.map(contact => (
-            <ListGroup.Item key={contact.id} className={s.item}>
-              <div className={s.user}>
-                {contact.name}: {contact.phone}
-              </div>
-              <Button
-                variant="primary"
-                type="button"
-                onClick={() => distpatch(deleteContactThunk(contact.id))}
-              >
-                Delete
-              </Button>
-            </ListGroup.Item>
-          ))}
-        </ListGroup>
+        <>
+          <ListGroup>
+            {filteredContacts.map(contact => (
+              <ListGroup.Item key={contact.id} className={s.item}>
+                <div className={s.user}>
+                  {contact.name}: {contact.phone}
+                </div>
+
+                <Button
+                  variant="primary"
+                  type="button"
+                  onClick={() => distpatch(deleteContactThunk(contact.id))}
+                >
+                  Delete
+                </Button>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        </>
       )}
     </>
   );

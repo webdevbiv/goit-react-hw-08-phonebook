@@ -54,8 +54,8 @@ const LoginForm = () => {
           // required
         />
       </Form.Group>
-      <div className="d-grid gap-2">
-        <Button variant="primary" type="submit">
+      <div className="btn-wrapper">
+        <Button variant="primary" type="submit" className="btn-fit-space">
           Log in
         </Button>
       </div>

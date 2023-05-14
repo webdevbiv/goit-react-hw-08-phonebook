@@ -55,6 +55,9 @@ main {
 .title {
   text-align: center;
   color: white;
+  &-not-first {
+    margin-top: 30px;
+  }
 }
 
 .form-label {
@@ -64,11 +67,16 @@ main {
 .form-input {
   border: none;
   &:focus {
+    border: 1px solid rgb(38, 171, 248);
     outline: 1px solid rgb(38, 171, 248);
     box-shadow: 0px 0px 8px 4px rgba(15, 191, 250, 0.7);
   }
 }
 
-.btn-primary {
-  box-sizing: border-box;
+.btn-wrapper {
+  display: flex;
+}
+
+.btn-fit-space {
+  flex: 1;
 }

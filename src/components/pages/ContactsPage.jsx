@@ -9,9 +9,9 @@ const ContactsPage = () => {
   return (
     <Container>
       <UserMenu />
-      <h1 className={'title'}>Phonebook</h1>
+      <h1 className={'title title-not-first'}>Phonebook</h1>
       <ContactForm />
-      <h1 className={'title'}>Contacts</h1>
+      <h1 className={'title title-not-first'}>Contacts</h1>
       <>
         <Filter />
         <ContactList />
