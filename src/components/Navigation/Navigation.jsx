@@ -25,7 +25,10 @@ const Navigation = () => {
     <Box sx={{ flexGrow: 1 }}>
       {isMobile ? (
         <>
-          <IconButtonStyled onClick={handleClick}>
+          <IconButtonStyled
+            onClick={handleClick}
+            sx={{ height: '40px', width: '40px' }}
+          >
             <MenuIcon />
           </IconButtonStyled>
           <Menu

@@ -1,13 +1,11 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { nanoid } from 'nanoid';
-import { ToastContainer, toast } from 'react-toastify';
-import { addContactThunk } from 'redux/contacts/thunk';
-import { selectContacts } from 'redux/contacts/selectors';
-
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import { ToastContainer, toast } from 'react-toastify';
+import { createContactThunk } from 'redux/contacts/operations';
+import { selectContacts } from 'redux/contacts/selectors';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
@@ -17,9 +15,8 @@ export const ContactForm = () => {
     e.preventDefault();
     const form = e.target;
     const newContact = {
-      id: nanoid(6),
       name: form.elements.name.value,
-      phone: form.elements.phone.value,
+      number: form.elements.phone.value,
     };
     const isExist = contacts.some(
       contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
@@ -27,7 +24,7 @@ export const ContactForm = () => {
 
     e.currentTarget.reset();
     if (isExist) {
-      toast.warn(`🦄 ${newContact.name} is already in the contacts.`, {
+      toast.warn(` ${newContact.name} is already in the contacts.`, {
         position: 'top-center',
         autoClose: false,
         hideProgressBar: true,
@@ -39,7 +36,7 @@ export const ContactForm = () => {
       });
       return;
     }
-    dispatch(addContactThunk(newContact));
+    dispatch(createContactThunk(newContact));
   };
 
   return (
