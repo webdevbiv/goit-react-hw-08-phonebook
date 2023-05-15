@@ -37,7 +37,11 @@ const Navigation = () => {
               edge="start"
               color="inherit"
               aria-label="menu"
-              sx={{ mr: 2, borderRadius: '50%' }}
+              sx={{
+                // borderRadius: '50%',
+                width: '48px',
+                height: '48px',
+              }}
               onClick={handleClick}
             >
               <MenuIcon />
