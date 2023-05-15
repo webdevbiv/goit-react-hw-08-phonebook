@@ -6,8 +6,6 @@ import {
   Link,
   Menu,
   MenuItem,
-  Toolbar,
-  Typography,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
