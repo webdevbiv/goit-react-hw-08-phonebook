@@ -20,10 +20,13 @@ const UserMenu = () => {
         Welcome, {user.name}
       </Typography>
       <Button
-        color="inherit"
         sx={{
-          width: '120px',
+          width: '100px',
           height: '50px',
+          backgroundColor: '#0A57CA',
+          '&:hover': {
+            backgroundColor: '#084197', // Set the hover background color
+          },
         }}
         onClick={handleClick}
       >
@@ -33,6 +36,9 @@ const UserMenu = () => {
             fontSize: '1.20rem',
             lineHeight: '1.6',
             letterSpacing: '0.0075em',
+            textTransform: 'capitalize',
+            color: 'white',
+            backgroundColor: '0D6EFD',
           }}
         >
           Logout
