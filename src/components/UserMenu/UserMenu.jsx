@@ -19,8 +19,24 @@ const UserMenu = () => {
       <Typography variant="h6" component="div" sx={{ mr: 2 }}>
         Welcome, {user.name}
       </Typography>
-      <Button color="inherit" onClick={handleClick}>
-        Logout
+      <Button
+        color="inherit"
+        sx={{
+          width: '120px',
+          height: '50px',
+        }}
+        onClick={handleClick}
+      >
+        <Typography
+          variant="button"
+          sx={{
+            fontSize: '1.20rem',
+            lineHeight: '1.6',
+            letterSpacing: '0.0075em',
+          }}
+        >
+          Logout
+        </Typography>
       </Button>
     </Box>
   );
