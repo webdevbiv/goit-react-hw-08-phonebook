@@ -1,6 +1,7 @@
 import { useAuth } from 'components/hooks';
 import { NavLink } from 'react-router-dom';
 import {
+  Toolbar,
   Box,
   IconButton,
   Link,
@@ -28,71 +29,73 @@ const Navigation = () => {
   };
   return (
     <Box sx={{ flexGrow: 1 }}>
-      {isMobile ? (
-        <>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-            onClick={handleClick}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Menu
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >
-            <MenuItem
-              onClick={handleClose}
-              component={NavLink}
-              to="/"
-              underline="none"
+      <Toolbar>
+        {isMobile ? (
+          <>
+            <IconButton
+              size="large"
+              edge="start"
               color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2, borderRadius: '50%' }}
+              onClick={handleClick}
             >
-              Home
-            </MenuItem>
-            {loggedin && (
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
               <MenuItem
                 onClick={handleClose}
                 component={NavLink}
-                to="/contacts"
+                to="/"
                 underline="none"
                 color="inherit"
               >
-                Contacts
+                Home
               </MenuItem>
-            )}
-          </Menu>
-        </>
-      ) : (
-        <>
-          <Link
-            component={NavLink}
-            to="/"
-            underline="none"
-            color="inherit"
-            variant="h6"
-            sx={{ mr: 2 }}
-          >
-            Home
-          </Link>
-          {loggedin && (
+              {loggedin && (
+                <MenuItem
+                  onClick={handleClose}
+                  component={NavLink}
+                  to="/contacts"
+                  underline="none"
+                  color="inherit"
+                >
+                  Contacts
+                </MenuItem>
+              )}
+            </Menu>
+          </>
+        ) : (
+          <>
             <Link
               component={NavLink}
-              to="/contacts"
+              to="/"
               underline="none"
               color="inherit"
               variant="h6"
               sx={{ mr: 2 }}
             >
-              Contacts
+              Home
             </Link>
-          )}
-        </>
-      )}
+            {loggedin && (
+              <Link
+                component={NavLink}
+                to="/contacts"
+                underline="none"
+                color="inherit"
+                variant="h6"
+                sx={{ mr: 2 }}
+              >
+                Contacts
+              </Link>
+            )}
+          </>
+        )}
+      </Toolbar>
     </Box>
   );
 
