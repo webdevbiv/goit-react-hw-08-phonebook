@@ -2,27 +2,21 @@ import AuthNav from 'components/AuthNav/AuthNav';
 import Navigation from 'components/Navigation/Navigation';
 import UserMenu from 'components/UserMenu/UserMenu';
 import { useAuth } from 'components/hooks';
-import { AppBar, Toolbar, Box } from '@mui/material';
+import { AppBarStyled, ToolbarStyled, BoxStyled } from './AppBar.style';
 
 const AppBarComponent = () => {
   const { loggedin } = useAuth();
+
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="primary">
-        <Toolbar>
+    <BoxStyled>
+      <AppBarStyled>
+        <ToolbarStyled>
           <Navigation />
           {loggedin ? <UserMenu /> : <AuthNav />}
-        </Toolbar>
-      </AppBar>
-    </Box>
+        </ToolbarStyled>
+      </AppBarStyled>
+    </BoxStyled>
   );
-
-  // return (
-  //   <header>
-  //     <Navigation />
-  //     {loggedin ? <UserMenu /> : <AuthNav />}
-  //   </header>
-  // );
 };
 
 export default AppBarComponent;

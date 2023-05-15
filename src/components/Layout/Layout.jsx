@@ -1,4 +1,4 @@
-import AppBar from 'components/AppBarComponent/AppBarComponent';
+import AppBar from 'components/AppBar/AppBar';
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
 import React, { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
