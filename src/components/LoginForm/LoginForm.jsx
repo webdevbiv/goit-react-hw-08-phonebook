@@ -1,18 +1,9 @@
-import { useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { userLoginThunk } from 'redux/auth/operations';
-import { selectErrorAuth } from 'redux/auth/selectors';
 
 const LoginForm = () => {
   const distpatch = useDispatch();
-  const error = useSelector(selectErrorAuth);
-
-  useEffect(() => {
-    if (error) {
-      console.log(error);
-    }
-  }, [error]);
 
   const handleSubmit = e => {
     e.preventDefault();
