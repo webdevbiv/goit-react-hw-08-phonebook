@@ -25,7 +25,6 @@ const handleFulfilledUserSignup = (state, { payload }) => {
 };
 
 const handleFulfilledUserLogin = (state, { payload }) => {
-  console.log('loggedin');
   state.error = null;
   state.isLoading = false;
   state.isLoggedIn = true;
