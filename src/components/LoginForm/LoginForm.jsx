@@ -16,16 +16,13 @@ const LoginForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    // const form = e.target;
+    const form = e.target;
     const loginUser = {
-      //FIXME - outcoment page
-      // email: form.elements.email.value,
-      // password: form.elements.password.value,
-      email: 'qwertyu123456@gpoiuytttt.com',
-      password: 'examplepwd12345',
+      email: form.elements.email.value,
+      password: form.elements.password.value,
     };
     distpatch(userLoginThunk(loginUser));
-    //form.reset();
+    form.reset();
   };
 
   return (
@@ -40,7 +37,7 @@ const LoginForm = () => {
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             placeholder="Email name@example.com"
             className="form-input"
-            // required
+            required
           />
         </Form.Group>
         <Form.Group className="mb-3">
@@ -52,7 +49,7 @@ const LoginForm = () => {
             pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$"
             title="Minimum five characters, at least one letter and one number"
             className="form-input"
-            // required
+            required
           />
         </Form.Group>
         <div className="btn-wrapper">

@@ -1,12 +1,17 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { addContactThunk, getContactsThunk, deleteContactThunk } from './thunk';
 import {
   createContactThunk,
+  deleteContactThunk,
   getAllContactsThunk,
   updateContactThunk,
 } from './operations';
 
-const arrThunks = [addContactThunk, getContactsThunk, deleteContactThunk];
+const arrThunks = [
+  createContactThunk,
+  deleteContactThunk,
+  getAllContactsThunk,
+  updateContactThunk,
+];
 const allThunks = type => arrThunks.map(thunk => thunk[type]);
 
 const handlePending = (state, _) => {

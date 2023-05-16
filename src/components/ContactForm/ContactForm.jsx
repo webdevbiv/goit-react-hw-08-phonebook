@@ -22,28 +22,29 @@ export const ContactForm = ({ contactData, handleClose }) => {
       number: form.elements.phone.value,
     };
 
-    const nameTaken = contacts
-      .filter(contact => contact.name !== contactData.name)
-      .some(
-        contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
-      );
-
-    if (nameTaken) {
-      e.currentTarget.reset();
-      toast.warn(` ${newContact.name} is already in the contacts.`, {
-        position: 'top-center',
-        autoClose: false,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: undefined,
-        theme: 'light',
-      });
-      return;
-    }
-
     if (contactData) {
+      const nameTaken = contacts
+        .filter(contact => contact.name !== contactData.name)
+        .some(
+          contact =>
+            contact.name.toLowerCase() === newContact.name.toLowerCase()
+        );
+
+      if (nameTaken) {
+        e.currentTarget.reset();
+        toast.warn(` ${newContact.name} is already in the contacts.`, {
+          position: 'top-center',
+          autoClose: false,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: 'light',
+        });
+        return;
+      }
+
       const id = contactData.id;
       const update = { id, newContact };
       dispatch(updateContactThunk(update));
@@ -71,6 +72,7 @@ export const ContactForm = ({ contactData, handleClose }) => {
     }
 
     dispatch(createContactThunk(newContact));
+    // e.currentTarget.reset();
   };
 
   return (

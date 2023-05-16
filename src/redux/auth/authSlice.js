@@ -41,7 +41,6 @@ const handleFulfilledUserLogout = (state, _) => {
 };
 
 const handleFulfilledUserRefreshThunk = (state, { payload }) => {
-  console.log('refreshing success');
   state.error = null;
   state.isLoading = false;
   state.isLoggedIn = true;
