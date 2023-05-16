@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import {
   userLogoutThunk,
   userLoginThunk,
@@ -60,29 +60,34 @@ const handleRejected = (state, { payload }) => {
   state.isRefreshing = false;
 };
 
-//SECTION - addCase section
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   extraReducers: builder => {
     builder
       .addCase(userLoginThunk.fulfilled, handleFulfilledUserLogin)
-      .addCase(userLoginThunk.pending, handlePending)
-      .addCase(userLoginThunk.rejected, handleRejected)
       .addCase(userLogoutThunk.fulfilled, handleFulfilledUserLogout)
-      .addCase(userLogoutThunk.pending, handlePending)
-      .addCase(userLogoutThunk.rejected, handleRejected)
       .addCase(userSignupThunk.fulfilled, handleFulfilledUserSignup)
-      .addCase(userSignupThunk.pending, handlePending)
-      .addCase(userSignupThunk.rejected, handleRejected)
       .addCase(userRefreshThunk.fulfilled, handleFulfilledUserRefreshThunk)
-      .addCase(userRefreshThunk.pending, handlePending)
-      .addCase(userRefreshThunk.rejected, handleRejected);
-    //TODO - create addMatcher
-    //  .addMatcher(isAnyOf(...allThunks('rejected')), handleRejected);
+      .addMatcher(
+        isAnyOf(
+          userLoginThunk.pending,
+          userLogoutThunk.pending,
+          userSignupThunk.pending,
+          userRefreshThunk.pending
+        ),
+        handlePending
+      )
+      .addMatcher(
+        isAnyOf(
+          userLoginThunk.rejected,
+          userLogoutThunk.rejected,
+          userSignupThunk.rejected,
+          userRefreshThunk.rejected
+        ),
+        handleRejected
+      );
   },
-  // const arrThunks = [registerUser, addContactThunk, deleteContactThunk];
-  // const allThunks = type => arrThunks.map(thunk => thunk[type]);
 });
 
 export const authReducer = authSlice.reducer;

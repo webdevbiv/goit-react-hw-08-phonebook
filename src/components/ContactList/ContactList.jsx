@@ -17,7 +17,7 @@ import s from '../ContactList/ContactList.module.scss';
 
 function ContactList() {
   const [open, setOpen] = useState(false);
-  const [contactName, setContactName] = useState('');
+  const [contactData, setContactData] = useState('');
 
   const distpatch = useDispatch();
   const filteredContacts = useSelector(getfilteredContacts);
@@ -34,16 +34,17 @@ function ContactList() {
 
   const handleOpenEdit = (name, number, id) => {
     const action = 'edit';
-    const contact = { action, name, number, id };
+    const contactData = { action, name, number, id };
     setOpen(true);
-    setContactName(contact);
+    setContactData(contactData);
   };
 
   const handleOpenDelete = (name, number, id) => {
     const action = 'delete';
-    const contact = { action, name, number, id };
+    const contactData = { action, name, number, id };
+    console.log(contactData);
     setOpen(true);
-    setContactName(contact);
+    setContactData(contactData);
   };
 
   const handleClose = () => {
@@ -99,7 +100,7 @@ function ContactList() {
             ))}
           </ListGroup>
           <BasicModal
-            contact={contactName}
+            contactData={contactData}
             open={open}
             handleClose={handleClose}
           />

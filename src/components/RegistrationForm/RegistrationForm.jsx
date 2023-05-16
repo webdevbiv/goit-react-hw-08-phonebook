@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { userSignupThunk } from 'redux/auth/operations';
-// import { selectErrorAuth } from 'redux/auth/selectors';
+import { toast } from 'react-toastify';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const RegistrationForm = () => {
@@ -11,8 +11,18 @@ const RegistrationForm = () => {
   const { error } = useAuth();
 
   useEffect(() => {
-    if (error !== null) {
-      console.log('Email already exists');
+    if (error && error.name) {
+      // console.log('Email already exists');
+      toast.warn(`Email already exists`, {
+        position: 'top-center',
+        autoClose: false,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: 'light',
+      });
     }
   }, [error]);
 
@@ -33,7 +43,7 @@ const RegistrationForm = () => {
   };
 
   return (
-    <>
+    <div>
       <Form id="userSignup" onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label> Name </Form.Label>
@@ -77,7 +87,7 @@ const RegistrationForm = () => {
           </Button>
         </div>
       </Form>
-    </>
+    </div>
   );
 };
 

@@ -1,16 +1,23 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import s from '../Home/Home.module.scss';
+
 import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
-    <div className="d-flex flex-column align-items-center">
+    <div className="d-flex flex-column " style={{ padding: '16px' }}>
       <h1 className="mb-4 title">Phone Book</h1>
-      <div className="d-flex">
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-evenly',
+          marginTop: '30px',
+        }}
+      >
         <Link to="/login">
           <button
             variant="primary"
-            className={`btn btn-primary mx-2 ${s.button}`}
+            className={`btn btn-primary mx-2`}
+            style={{ width: '80px' }}
           >
             Log in
           </button>
@@ -18,7 +25,8 @@ const Home = () => {
         <Link to="/registration">
           <button
             variant="primary"
-            className={`btn btn-primary mx-2 ${s.button}`}
+            className={`btn btn-primary mx-2`}
+            style={{ width: '80px' }}
           >
             Sign up
           </button>

@@ -47,7 +47,6 @@ export const createContactThunk = createAsyncThunk(
         `/contacts`,
         newContact
       );
-      console.log(data);
       return data;
     } catch (error) {
       console.error(error);
@@ -65,14 +64,12 @@ export const deleteContactThunk = createAsyncThunk(
       return rejectWithValue('Unable to delete contact no token');
     }
     try {
-      console.log(contactId);
       setAuthHeader(token);
       const { data } = await privateInstance(token).delete(
         `/contacts/${contactId}`
       );
       return data;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(error.message);
     }
   }
@@ -80,7 +77,7 @@ export const deleteContactThunk = createAsyncThunk(
 
 export const updateContactThunk = createAsyncThunk(
   'contacts/update',
-  async ({ id, update }, { rejectWithValue, getState }) => {
+  async ({ id, newContact }, { rejectWithValue, getState }) => {
     const state = getState();
     const token = state.auth.token;
     if (token === null) {
@@ -90,7 +87,7 @@ export const updateContactThunk = createAsyncThunk(
       setAuthHeader(token);
       const { data } = await privateInstance(token).patch(
         `/contacts/${id}`,
-        update
+        newContact
       );
       return data;
     } catch (error) {

@@ -1,13 +1,16 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'react-toastify/dist/ReactToastify.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { ToastContainer, toast } from 'react-toastify';
-import { createContactThunk } from 'redux/contacts/operations';
-import { selectContacts } from 'redux/contacts/selectors';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import {
+  createContactThunk,
+  updateContactThunk,
+} from 'redux/contacts/operations';
+import { selectContacts } from 'redux/contacts/selectors';
 
-export const ContactForm = () => {
+export const ContactForm = ({ contactData, handleClose }) => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
 
@@ -18,12 +21,15 @@ export const ContactForm = () => {
       name: form.elements.name.value,
       number: form.elements.phone.value,
     };
-    const isExist = contacts.some(
-      contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
-    );
 
-    e.currentTarget.reset();
-    if (isExist) {
+    const nameTaken = contacts
+      .filter(contact => contact.name !== contactData.name)
+      .some(
+        contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
+      );
+
+    if (nameTaken) {
+      e.currentTarget.reset();
       toast.warn(` ${newContact.name} is already in the contacts.`, {
         position: 'top-center',
         autoClose: false,
@@ -36,26 +42,47 @@ export const ContactForm = () => {
       });
       return;
     }
+
+    if (contactData) {
+      const id = contactData.id;
+      const update = { id, newContact };
+      dispatch(updateContactThunk(update));
+      handleClose();
+      return;
+    }
+
+    const sameName = contacts.some(
+      contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
+    );
+
+    if (sameName) {
+      e.currentTarget.reset();
+      toast.warn(` ${newContact.name} is already in the contacts.`, {
+        position: 'top-center',
+        autoClose: false,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: 'light',
+      });
+      return;
+    }
+
     dispatch(createContactThunk(newContact));
   };
 
   return (
     <>
-      <ToastContainer
-        position="top-center"
-        autoClose={false}
-        newestOnTop
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable={false}
-        theme="light"
-      />
-
       <Form id="contact" onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
-          <Form.Label> Name </Form.Label>
+          <Form.Label style={contactData ? { color: 'black' } : {}}>
+            Name
+          </Form.Label>
           <Form.Control
+            defaultValue={contactData ? contactData.name : ''}
+            style={contactData ? { outline: '1px solid black' } : {}}
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -65,8 +92,12 @@ export const ContactForm = () => {
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label> Number </Form.Label>
+          <Form.Label style={contactData ? { color: 'black' } : {}}>
+            Number
+          </Form.Label>
           <Form.Control
+            defaultValue={contactData ? contactData.number : ''}
+            style={contactData ? { outline: '1px solid black' } : {}}
             type="tel"
             name="phone"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"

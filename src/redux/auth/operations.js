@@ -29,10 +29,8 @@ export const userSignupThunk = createAsyncThunk(
     try {
       const { data } = await publicInstance.post('/users/signup', credentials);
       setAuthHeader(data.token);
-      console.log(data);
       return data;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(error.response.data);
     }
   }
@@ -44,11 +42,8 @@ export const userLoginThunk = createAsyncThunk(
     try {
       const { data } = await publicInstance.post('/users/login', credentials);
       setAuthHeader(data.token);
-      console.log(`userLoginThunk success token: ${data.token}`);
-      console.log('token added to headers');
       return data;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(error.message);
     }
   }
@@ -61,7 +56,6 @@ export const userLogoutThunk = createAsyncThunk(
       const state = getState();
       const token = state.auth.token;
       await privateInstance(token).post('/users/logout');
-      console.log('userLogoutThunk success');
       clearAuthHeader();
     } catch (error) {
       console.error(error);
@@ -75,18 +69,15 @@ export const userRefreshThunk = createAsyncThunk(
   async (_, { getState, rejectWithValue }) => {
     const state = getState();
     const token = state.auth.token;
-    console.log(`userRefreshThunk token: ${state.auth.token}`);
+
     if (token === null) {
       return rejectWithValue('Unable to refresh user no token');
     }
     try {
       setAuthHeader(token);
       const { data } = await privateInstance(token).get('/users/current');
-      console.log(`userRefreshThunk success`);
-      console.log(data);
       return data;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(error.message);
     }
   }

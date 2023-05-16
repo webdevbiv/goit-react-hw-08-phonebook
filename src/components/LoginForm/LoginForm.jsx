@@ -10,7 +10,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (error) {
-      console.log('Wrong E-mail or Password');
+      console.log(error);
     }
   }, [error]);
 

@@ -23,14 +23,14 @@ const style = {
   borderRadius: 2,
 };
 
-export default function BasicModal({ open, handleClose, contact }) {
+export default function BasicModal({ open, handleClose, contactData }) {
   const distpatch = useDispatch();
 
   useEffect(() => {
     return () => {
       distpatch(getAllContactsThunk());
     };
-  }, [distpatch]);
+  }, [distpatch, contactData]);
 
   const handleYes = id => {
     distpatch(deleteContactThunk(id));
@@ -48,7 +48,7 @@ export default function BasicModal({ open, handleClose, contact }) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        {contact.action === 'delete' ? (
+        {contactData && contactData.action === 'delete' ? (
           <Box sx={style}>
             <Typography
               id="modal-modal-title"
@@ -59,17 +59,19 @@ export default function BasicModal({ open, handleClose, contact }) {
                 marginBottom: '10px',
               }}
             >
-              Delete "{contact.name}" contact?
+              Delete "{contactData.name}" contact?
             </Typography>
-            <ButtonComponent
-              text={'Yes'}
-              onClick={() => handleYes(contact.id)}
-            />
-            <ButtonComponent text={'No'} onClick={handleNo} />
+            <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+              <ButtonComponent
+                text={'Yes'}
+                onClick={() => handleYes(contactData.id)}
+              />
+              <ButtonComponent text={'No'} onClick={handleNo} />
+            </div>
           </Box>
         ) : (
           <Box sx={style}>
-            <ContactForm />
+            <ContactForm contactData={contactData} handleClose={handleClose} />
           </Box>
         )}
       </Modal>

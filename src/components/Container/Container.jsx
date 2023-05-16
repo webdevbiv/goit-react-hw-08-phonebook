@@ -1,11 +1,14 @@
+import Toast from 'components/Toast/Toast';
+
 const Container = ({ children }) => {
   return (
-    <div className={'container'}>
-      {
-        //NOTE - 'container' has background image
-      }
-      <div className={'wrapper'}>{children}</div>
-    </div>
+    <>
+      <Toast />
+
+      <div className={'container'}>
+        <div className={'wrapper'}>{children}</div>
+      </div>
+    </>
   );
 };
 
