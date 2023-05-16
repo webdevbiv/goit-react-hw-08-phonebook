@@ -1,8 +1,9 @@
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import BasicModal from 'components/BasicModal/BasicModal';
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
 import { useEffect, useState } from 'react';
-
-import { PencilSquare, Trash } from 'react-bootstrap-icons';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllContactsThunk } from 'redux/contacts/operations';
@@ -13,7 +14,6 @@ import {
   selectIsLoading,
 } from 'redux/contacts/selectors';
 import s from '../ContactList/ContactList.module.scss';
-import BasicModal from 'components/BasicModal/BasicModal';
 
 function ContactList() {
   const [open, setOpen] = useState(false);
@@ -27,10 +27,21 @@ function ContactList() {
 
   useEffect(() => {
     distpatch(getAllContactsThunk());
-  }, [distpatch]);
+    if (!open) {
+      distpatch(getAllContactsThunk());
+    }
+  }, [distpatch, open]);
 
-  const handleOpen = (name, id) => {
-    const contact = { name, id };
+  const handleOpenEdit = (name, number, id) => {
+    const action = 'edit';
+    const contact = { action, name, number, id };
+    setOpen(true);
+    setContactName(contact);
+  };
+
+  const handleOpenDelete = (name, number, id) => {
+    const action = 'delete';
+    const contact = { action, name, number, id };
     setOpen(true);
     setContactName(contact);
   };
@@ -47,26 +58,40 @@ function ContactList() {
         <>
           <ListGroup>
             {filteredContacts.map(contact => (
-              <ListGroup.Item key={contact.id} className={s.item}>
+              <ListGroup.Item
+                key={contact.id}
+                className={s.item}
+                style={{ padding: '8px' }}
+              >
                 <div className={s.user}>
                   {contact.name}: {contact.number}
                 </div>
                 <div>
-                  <PencilSquare
-                    size={20}
-                    onClick
-                    style={{
+                  <EditIcon
+                    onClick={() =>
+                      handleOpenEdit(contact.name, contact.number, contact.id)
+                    }
+                    sx={{
                       cursor: 'pointer',
-                      color: '#0D6EFD',
-                      marginRight: '10px',
+                      fontSize: 20,
+                      marginRight: '5px',
+                      color: '#0A57CA',
+                      '&:hover': {
+                        color: '#084197',
+                      },
                     }}
                   />
-                  <Trash
-                    size={20}
-                    onClick={() => handleOpen(contact.name, contact.id)}
-                    style={{
+                  <DeleteForeverIcon
+                    onClick={() =>
+                      handleOpenDelete(contact.name, contact.number, contact.id)
+                    }
+                    sx={{
                       cursor: 'pointer',
-                      color: '#0D6EFD',
+                      fontSize: 22,
+                      color: '#0A57CA',
+                      '&:hover': {
+                        color: '#084197',
+                      },
                     }}
                   />
                 </div>

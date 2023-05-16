@@ -9,7 +9,7 @@ const AppBarComponent = () => {
 
   return (
     <BoxStyled>
-      <AppBarStyled>
+      <AppBarStyled sx={{ position: 'static' }}>
         <ToolbarStyled>
           <Navigation />
           {loggedin ? <UserMenu /> : <AuthNav />}
