@@ -26,12 +26,6 @@ const style = {
 export default function BasicModal({ open, handleClose, contactData }) {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    return () => {
-      console.log('dismounting Modal');
-    };
-  }, [dispatch]);
-
   const handleYes = id => {
     dispatch(deleteContactThunk(id));
     dispatch(getAllContactsThunk());
