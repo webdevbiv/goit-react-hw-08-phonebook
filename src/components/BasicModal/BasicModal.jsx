@@ -24,22 +24,24 @@ const style = {
 };
 
 export default function BasicModal({ open, handleClose, contactData }) {
-  const distpatch = useDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     return () => {
-      distpatch(getAllContactsThunk());
+      console.log('dismounting Modal');
     };
-  }, [distpatch, contactData]);
+  }, [dispatch]);
 
   const handleYes = id => {
-    distpatch(deleteContactThunk(id));
+    dispatch(deleteContactThunk(id));
+    dispatch(getAllContactsThunk());
     handleClose();
   };
 
-  const handleNo = id => {
+  const handleNo = () => {
     handleClose();
   };
+
   return (
     <div>
       <Modal

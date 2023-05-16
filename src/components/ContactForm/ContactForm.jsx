@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {
   createContactThunk,
   updateContactThunk,
+  getAllContactsThunk,
 } from 'redux/contacts/operations';
 import { selectContacts } from 'redux/contacts/selectors';
 
@@ -23,8 +24,14 @@ export const ContactForm = ({ contactData, handleClose }) => {
     };
 
     if (contactData) {
+      // это проверка на то что бы имя не совпадало с теми которые уже есть в списке контакатов
+      // когда юзер вносит измкнения в контакт
+      // он пропускает дальше только если имя прежнее или такое которого нет в списке
       const nameTaken = contacts
-        .filter(contact => contact.name !== contactData.name)
+        .filter(
+          contact =>
+            contact.name.toLowerCase() !== contactData.name.toLowerCase()
+        )
         .some(
           contact =>
             contact.name.toLowerCase() === newContact.name.toLowerCase()
@@ -48,6 +55,7 @@ export const ContactForm = ({ contactData, handleClose }) => {
       const id = contactData.id;
       const update = { id, newContact };
       dispatch(updateContactThunk(update));
+      dispatch(getAllContactsThunk());
       handleClose();
       return;
     }
@@ -72,7 +80,7 @@ export const ContactForm = ({ contactData, handleClose }) => {
     }
 
     dispatch(createContactThunk(newContact));
-    // e.currentTarget.reset();
+    e.currentTarget.reset();
   };
 
   return (

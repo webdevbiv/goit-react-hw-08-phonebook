@@ -16,7 +16,6 @@ export const App = () => {
   return loading ? (
     <>
       <LoadingSpinner />
-      <AppRoutes />
     </>
   ) : (
     <AppRoutes />

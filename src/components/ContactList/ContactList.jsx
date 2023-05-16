@@ -16,39 +16,27 @@ import {
 import s from '../ContactList/ContactList.module.scss';
 
 function ContactList() {
-  const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const [contactData, setContactData] = useState('');
 
-  const distpatch = useDispatch();
+  const dispatch = useDispatch();
   const filteredContacts = useSelector(getfilteredContacts);
   const contacts = useSelector(selectContacts);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
   useEffect(() => {
-    distpatch(getAllContactsThunk());
-    if (!open) {
-      distpatch(getAllContactsThunk());
-    }
-  }, [distpatch, open]);
+    dispatch(getAllContactsThunk());
+  }, [dispatch]);
 
-  const handleOpenEdit = (name, number, id) => {
-    const action = 'edit';
+  const handleOpenModal = (name, number, id, action) => {
     const contactData = { action, name, number, id };
-    setOpen(true);
-    setContactData(contactData);
-  };
-
-  const handleOpenDelete = (name, number, id) => {
-    const action = 'delete';
-    const contactData = { action, name, number, id };
-    console.log(contactData);
-    setOpen(true);
+    setOpenModal(true);
     setContactData(contactData);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setOpenModal(false);
   };
 
   return (
@@ -70,7 +58,12 @@ function ContactList() {
                 <div>
                   <EditIcon
                     onClick={() =>
-                      handleOpenEdit(contact.name, contact.number, contact.id)
+                      handleOpenModal(
+                        contact.name,
+                        contact.number,
+                        contact.id,
+                        'edit'
+                      )
                     }
                     sx={{
                       cursor: 'pointer',
@@ -84,7 +77,12 @@ function ContactList() {
                   />
                   <DeleteForeverIcon
                     onClick={() =>
-                      handleOpenDelete(contact.name, contact.number, contact.id)
+                      handleOpenModal(
+                        contact.name,
+                        contact.number,
+                        contact.id,
+                        'delete'
+                      )
                     }
                     sx={{
                       cursor: 'pointer',
@@ -101,7 +99,7 @@ function ContactList() {
           </ListGroup>
           <BasicModal
             contactData={contactData}
-            open={open}
+            open={openModal}
             handleClose={handleClose}
           />
         </>

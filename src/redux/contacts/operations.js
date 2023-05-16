@@ -1,30 +1,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-
-axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
-
-const privateInstance = token =>
-  axios.create({
-    baseURL: 'https://connections-api.herokuapp.com/',
-    headers: { Authorization: `Bearer ${token}` },
-  });
-
-// Utility to add JWT
-const setAuthHeader = token => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
+import { setAuthHeader } from 'redux/auth/operations';
 
 export const getAllContactsThunk = createAsyncThunk(
   'contacts/getall',
   async (_, { rejectWithValue, getState }) => {
     const state = getState();
     const token = state.auth.token;
-    if (token === null) {
-      return rejectWithValue('Unable to get contacts');
-    }
     try {
       setAuthHeader(token);
-      const { data } = await privateInstance(token).get('/contacts');
+      const { data } = await axios.get('/contacts');
       return data;
     } catch (error) {
       console.error(error);
@@ -38,15 +23,9 @@ export const createContactThunk = createAsyncThunk(
   async (newContact, { rejectWithValue, getState }) => {
     const state = getState();
     const token = state.auth.token;
-    if (token === null) {
-      return rejectWithValue('Unable to delete contact no token');
-    }
     try {
       setAuthHeader(token);
-      const { data } = await privateInstance(token).post(
-        `/contacts`,
-        newContact
-      );
+      const { data } = await axios.post(`/contacts`, newContact);
       return data;
     } catch (error) {
       console.error(error);
@@ -60,14 +39,9 @@ export const deleteContactThunk = createAsyncThunk(
   async (contactId, { rejectWithValue, getState }) => {
     const state = getState();
     const token = state.auth.token;
-    if (token === null) {
-      return rejectWithValue('Unable to delete contact no token');
-    }
     try {
       setAuthHeader(token);
-      const { data } = await privateInstance(token).delete(
-        `/contacts/${contactId}`
-      );
+      const { data } = await axios.delete(`/contacts/${contactId}`);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -80,15 +54,9 @@ export const updateContactThunk = createAsyncThunk(
   async ({ id, newContact }, { rejectWithValue, getState }) => {
     const state = getState();
     const token = state.auth.token;
-    if (token === null) {
-      return rejectWithValue('Unable to delete contact no token');
-    }
     try {
       setAuthHeader(token);
-      const { data } = await privateInstance(token).patch(
-        `/contacts/${id}`,
-        newContact
-      );
+      const { data } = await axios.patch(`/contacts/${id}`, newContact);
       return data;
     } catch (error) {
       console.error(error);

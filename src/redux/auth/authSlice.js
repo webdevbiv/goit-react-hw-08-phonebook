@@ -25,6 +25,7 @@ const handleFulfilledUserSignup = (state, { payload }) => {
 };
 
 const handleFulfilledUserLogin = (state, { payload }) => {
+  console.log('loggedin');
   state.error = null;
   state.isLoading = false;
   state.isLoggedIn = true;
@@ -40,7 +41,7 @@ const handleFulfilledUserLogout = (state, _) => {
   state.user = { name: null, email: null };
 };
 
-const handleFulfilledUserRefreshThunk = (state, { payload }) => {
+const handleFulfilledUserRefresh = (state, { payload }) => {
   state.error = null;
   state.isLoading = false;
   state.isLoggedIn = true;
@@ -67,7 +68,7 @@ const authSlice = createSlice({
       .addCase(userLoginThunk.fulfilled, handleFulfilledUserLogin)
       .addCase(userLogoutThunk.fulfilled, handleFulfilledUserLogout)
       .addCase(userSignupThunk.fulfilled, handleFulfilledUserSignup)
-      .addCase(userRefreshThunk.fulfilled, handleFulfilledUserRefreshThunk)
+      .addCase(userRefreshThunk.fulfilled, handleFulfilledUserRefresh)
       .addMatcher(
         isAnyOf(
           userLoginThunk.pending,
