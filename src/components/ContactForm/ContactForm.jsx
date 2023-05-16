@@ -55,7 +55,7 @@ export const ContactForm = ({ contactData, handleClose }) => {
       const id = contactData.id;
       const update = { id, newContact };
       dispatch(updateContactThunk(update));
-      dispatch(getAllContactsThunk());
+      // dispatch(getAllContactsThunk());
       handleClose();
       return;
     }
