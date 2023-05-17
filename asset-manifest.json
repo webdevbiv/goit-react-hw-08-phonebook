@@ -1,24 +1,24 @@
 {
   "files": {
     "main.css": "/goit-react-hw-08-phonebook/static/css/main.396f29c5.css",
-    "main.js": "/goit-react-hw-08-phonebook/static/js/main.3d88f654.js",
+    "main.js": "/goit-react-hw-08-phonebook/static/js/main.a50bc1b3.js",
     "static/js/827.a8748812.chunk.js": "/goit-react-hw-08-phonebook/static/js/827.a8748812.chunk.js",
     "static/js/670.d069cd1a.chunk.js": "/goit-react-hw-08-phonebook/static/js/670.d069cd1a.chunk.js",
     "static/css/884.9799b9a3.chunk.css": "/goit-react-hw-08-phonebook/static/css/884.9799b9a3.chunk.css",
-    "static/js/884.fc9f66a8.chunk.js": "/goit-react-hw-08-phonebook/static/js/884.fc9f66a8.chunk.js",
+    "static/js/884.0d8b8963.chunk.js": "/goit-react-hw-08-phonebook/static/js/884.0d8b8963.chunk.js",
     "static/js/863.17c78e94.chunk.js": "/goit-react-hw-08-phonebook/static/js/863.17c78e94.chunk.js",
     "static/media/phone1.jpg": "/goit-react-hw-08-phonebook/static/media/phone1.ffa973098384f04f3a96.jpg",
     "index.html": "/goit-react-hw-08-phonebook/index.html",
     "main.396f29c5.css.map": "/goit-react-hw-08-phonebook/static/css/main.396f29c5.css.map",
-    "main.3d88f654.js.map": "/goit-react-hw-08-phonebook/static/js/main.3d88f654.js.map",
+    "main.a50bc1b3.js.map": "/goit-react-hw-08-phonebook/static/js/main.a50bc1b3.js.map",
     "827.a8748812.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/827.a8748812.chunk.js.map",
     "670.d069cd1a.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/670.d069cd1a.chunk.js.map",
     "884.9799b9a3.chunk.css.map": "/goit-react-hw-08-phonebook/static/css/884.9799b9a3.chunk.css.map",
-    "884.fc9f66a8.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/884.fc9f66a8.chunk.js.map",
+    "884.0d8b8963.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/884.0d8b8963.chunk.js.map",
     "863.17c78e94.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/863.17c78e94.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.396f29c5.css",
-    "static/js/main.3d88f654.js"
+    "static/js/main.a50bc1b3.js"
   ]
 }
