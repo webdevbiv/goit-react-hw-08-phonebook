@@ -4,7 +4,6 @@ const Container = ({ children }) => {
   return (
     <>
       <Toast />
-
       <div className={'container'}>
         <div className={'wrapper'}>{children}</div>
       </div>

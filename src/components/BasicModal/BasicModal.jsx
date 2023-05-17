@@ -1,10 +1,10 @@
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
 import { ButtonComponent } from 'components/ButtonComponent/ButtonComponent';
+import { UpdateContactForm } from 'components/UpdateContactForm/UpdateContactForm';
 import { useDispatch } from 'react-redux';
 import { deleteContactThunk } from 'redux/contacts/operations';
-import { ContactForm } from 'components/ContactForm/ContactForm';
 
 const style = {
   position: 'absolute',
@@ -61,7 +61,10 @@ export default function BasicModal({ open, handleClose, contactData }) {
           </Box>
         ) : (
           <Box sx={style}>
-            <ContactForm contactData={contactData} handleClose={handleClose} />
+            <UpdateContactForm
+              contactData={contactData}
+              handleClose={handleClose}
+            />
           </Box>
         )}
       </Modal>

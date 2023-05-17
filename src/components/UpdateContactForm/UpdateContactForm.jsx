@@ -2,12 +2,12 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { createContactThunk } from 'redux/contacts/operations';
+import { updateContactThunk } from 'redux/contacts/operations';
 import { selectContacts } from 'redux/contacts/selectors';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-export const ContactForm = () => {
+export const UpdateContactForm = ({ contactData, handleClose }) => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
 
@@ -19,9 +19,13 @@ export const ContactForm = () => {
       number: form.elements.phone.value,
     };
 
-    const sameName = contacts.some(
-      contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
-    );
+    const sameName = contacts
+      .filter(
+        contact => contact.name.toLowerCase() !== contactData.name.toLowerCase()
+      )
+      .some(
+        contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
+      );
 
     if (sameName) {
       e.currentTarget.reset();
@@ -38,8 +42,10 @@ export const ContactForm = () => {
       return;
     }
 
-    dispatch(createContactThunk(newContact));
-    e.currentTarget.reset();
+    const id = contactData.id;
+    const update = { id, newContact };
+    dispatch(updateContactThunk(update));
+    handleClose();
   };
 
   return (
@@ -48,6 +54,8 @@ export const ContactForm = () => {
         <Form.Group className="mb-3">
           <Form.Label>Name</Form.Label>
           <Form.Control
+            defaultValue={contactData ? contactData.name : ''}
+            style={{ outline: '1px solid black' }}
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -59,6 +67,8 @@ export const ContactForm = () => {
         <Form.Group className="mb-3">
           <Form.Label>Number</Form.Label>
           <Form.Control
+            defaultValue={contactData ? contactData.number : ''}
+            style={{ outline: '1px solid black' }}
             type="tel"
             name="phone"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
