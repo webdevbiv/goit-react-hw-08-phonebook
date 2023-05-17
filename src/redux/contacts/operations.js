@@ -9,8 +9,8 @@ export const getAllContactsThunk = createAsyncThunk(
     const token = state.auth.token;
     try {
       setAuthHeader(token);
-      const { data } = await axios.get('/contacts');
-      return data;
+      const res = await axios.get('/contacts');
+      return res.data;
     } catch (error) {
       console.error(error);
       return rejectWithValue(error.message);
@@ -25,8 +25,8 @@ export const createContactThunk = createAsyncThunk(
     const token = state.auth.token;
     try {
       setAuthHeader(token);
-      const { data } = await axios.post(`/contacts`, newContact);
-      return data;
+      const res = await axios.post(`/contacts`, newContact);
+      return res.data;
     } catch (error) {
       console.error(error);
       return rejectWithValue(error.message);
@@ -41,8 +41,8 @@ export const deleteContactThunk = createAsyncThunk(
     const token = state.auth.token;
     try {
       setAuthHeader(token);
-      const { data } = await axios.delete(`/contacts/${contactId}`);
-      return data;
+      const res = await axios.delete(`/contacts/${contactId}`);
+      return res.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -56,8 +56,8 @@ export const updateContactThunk = createAsyncThunk(
     const token = state.auth.token;
     try {
       setAuthHeader(token);
-      const { data } = await axios.patch(`/contacts/${id}`, newContact);
-      return data;
+      const res = await axios.patch(`/contacts/${id}`, newContact);
+      return res.data;
     } catch (error) {
       console.error(error);
       return rejectWithValue(error.message);

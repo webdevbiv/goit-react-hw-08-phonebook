@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {
   createContactThunk,
   updateContactThunk,
-  getAllContactsThunk,
+  // getAllContactsThunk,
 } from 'redux/contacts/operations';
 import { selectContacts } from 'redux/contacts/selectors';
 
@@ -23,21 +23,24 @@ export const ContactForm = ({ contactData, handleClose }) => {
       number: form.elements.phone.value,
     };
 
+    //NOTE - форма используеться как для создания пользователя так и для изменения пользователя в модалке
+    //NOTE - если в форму передается contactData то стиль и обработка как форма в модалке на изменение данных пользователя
+
+    //NOTE - для формы изменения
     if (contactData) {
-      // это проверка на то что бы имя не совпадало с теми которые уже есть в списке контакатов
-      // когда юзер вносит измкнения в контакт
-      // он пропускает дальше только если имя прежнее или такое которого нет в списке
-      const nameTaken = contacts
+      const sameName = contacts
+        //NOTE - Убрать имя текущего юзера из списка для того чтоб можно было сохранить с старым именем
         .filter(
           contact =>
             contact.name.toLowerCase() !== contactData.name.toLowerCase()
         )
+        //NOTE - Не допустить совпадение имени с теми которые уже в списке
         .some(
           contact =>
             contact.name.toLowerCase() === newContact.name.toLowerCase()
         );
 
-      if (nameTaken) {
+      if (sameName) {
         e.currentTarget.reset();
         toast.warn(` ${newContact.name} is already in the contacts.`, {
           position: 'top-center',
@@ -55,32 +58,34 @@ export const ContactForm = ({ contactData, handleClose }) => {
       const id = contactData.id;
       const update = { id, newContact };
       dispatch(updateContactThunk(update));
-      // dispatch(getAllContactsThunk());
       handleClose();
       return;
     }
 
-    const sameName = contacts.some(
-      contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
-    );
+    //NOTE - для формы создания
+    if (!contactData) {
+      const sameName = contacts.some(
+        contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
+      );
 
-    if (sameName) {
+      if (sameName) {
+        e.currentTarget.reset();
+        toast.warn(` ${newContact.name} is already in the contacts.`, {
+          position: 'top-center',
+          autoClose: false,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: 'light',
+        });
+        return;
+      }
+
+      dispatch(createContactThunk(newContact));
       e.currentTarget.reset();
-      toast.warn(` ${newContact.name} is already in the contacts.`, {
-        position: 'top-center',
-        autoClose: false,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: undefined,
-        theme: 'light',
-      });
-      return;
     }
-
-    dispatch(createContactThunk(newContact));
-    e.currentTarget.reset();
   };
 
   return (

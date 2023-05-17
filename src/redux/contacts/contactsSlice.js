@@ -19,7 +19,7 @@ const handlePending = (state, _) => {
 };
 const handleFulfilled = (state, _) => {
   state.isLoading = false;
-  state.error = '';
+  state.error = null;
 };
 const handleFulfilledGet = (state, { payload }) => {
   state.contacts = payload;
@@ -28,8 +28,10 @@ const handleFulfilledPost = (state, { payload }) => {
   state.contacts.push(payload);
 };
 const handleFulfilledDelete = (state, { payload }) => {
-  state.contacts = state.contacts.filter(contact => contact.id !== payload);
+  const index = state.contacts.findIndex(contact => contact.id === payload.id);
+  state.contacts.splice(index, 1);
 };
+
 const handleFulfilledUpdate = (state, { payload }) => {
   state.contacts = state.contacts.map(contact =>
     contact.id === payload.id ? payload : contact
