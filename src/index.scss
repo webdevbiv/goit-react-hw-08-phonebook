@@ -30,12 +30,39 @@ main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: url(./assets/images/phone1.jpg) no-repeat
-    center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
+  background-image: url(./assets/images/phone1_1400.jpg);
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  @media (min-width: 1309px) and (max-width: 1400px) {
+    .background-image {
+      background-image: url(./assets/images/phone1_1400.jpg);
+    }
+  }
+
+  @media (min-width: 1089px) and (max-width: 1308px) {
+    .background-image {
+      background-image: url(./assets/images/phone1_1308.jpg);
+    }
+  }
+
+  @media (min-width: 781px) and (max-width: 1088px) {
+    .background-image {
+      background-image: url(./assets/images/phone1_1088.jpg);
+    }
+  }
+
+  @media (min-width: 201px) and (max-width: 780px) {
+    .background-image {
+      background-image: url(./assets/images/phone1_780.jpg);
+    }
+  }
+
+  @media (max-width: 200px) {
+    .background-image {
+      background-image: url(./assets/images/phone1_200.jpg);
+    }
+  }
 }
 
 .container {
